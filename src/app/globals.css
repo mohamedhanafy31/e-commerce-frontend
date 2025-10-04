@@ -1,26 +1,177 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Traditional Arabic Elegance Palette */
+  --background: #E0C097; /* Warm Sand - Primary Background */
+  --foreground: #7B1E3A; /* Deep Maroon - Primary Text */
+  --card: #FFFDF6; /* Ivory - Content Background */
+  --card-foreground: #7B1E3A; /* Deep Maroon - Card Text */
+  --popover: #FFFDF6; /* Ivory - Popover Background */
+  --popover-foreground: #7B1E3A; /* Deep Maroon */
+  --primary: #00695C; /* Emerald Green - Primary Action */
+  --primary-foreground: #ffffff; /* White text on primary */
+  --secondary: #E0C097; /* Warm Sand - Secondary Background */
+  --secondary-foreground: #7B1E3A; /* Deep Maroon text */
+  --muted: #F5E6D7; /* Light Warm Sand - Muted background */
+  --muted-foreground: #7B1E3A; /* Deep Maroon - Muted text */
+  --accent: #FFD700; /* Gold - Highlights */
+  --accent-foreground: #7B1E3A; /* Deep Maroon text on accent */
+  --destructive: #7B1E3A; /* Deep Maroon - Destructive actions */
+  --destructive-foreground: #ffffff; /* White text on destructive */
+  --border: #E0C097; /* Warm Sand - Borders */
+  --input: #FFFDF6; /* Ivory - Input backgrounds */
+  --ring: #FFD700; /* Gold - Focus rings */
+  --radius: 0.5rem;
+  --chart-1: #00695C; /* Emerald Green */
+  --chart-2: #7B1E3A; /* Deep Maroon */
+  --chart-3: #FFD700; /* Gold */
+  --chart-4: #E0C097; /* Warm Sand */
+  --chart-5: #FFFDF6; /* Ivory */
+  
+  /* Traditional Arabic Elegance Colors */
+  --emerald-green: #00695C; /* Primary Action / Brand Color */
+  --deep-maroon: #7B1E3A; /* Secondary Accent / Luxury */
+  --gold: #FFD700; /* Highlights / Premium Promotions */
+  --warm-sand: #E0C097; /* Primary Background / Texture */
+  --ivory: #FFFDF6; /* Content Background / Panels */
+  
+  /* Legacy TOLIDO Brand Colors - Deprecated but kept for compatibility */
+  --tolid-red: #00695C; /* Now maps to Emerald Green */
+  --tolid-gold: #FFD700; /* Updated to Traditional Gold */
+  --tolid-light-gold: #FFFDF6; /* Now maps to Ivory */
+  --tolid-dark-gold: #7B1E3A; /* Now maps to Deep Maroon */
+  --tolid-fresh-green: #00695C; /* Now Emerald Green */
+  --tolid-charcoal: #7B1E3A; /* Now Deep Maroon */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --card: #0a0a0a;
+    --card-foreground: #ededed;
+    --popover: #0a0a0a;
+    --popover-foreground: #ededed;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --secondary: #1e293b;
+    --secondary-foreground: #f8fafc;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --accent: #1e293b;
+    --accent-foreground: #f8fafc;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #1e293b;
+    --input: #1e293b;
+    --ring: #3b82f6;
+    --chart-1: #3b82f6;
+    --chart-2: #10b981;
+    --chart-3: #f59e0b;
+    --chart-4: #ef4444;
+    --chart-5: #8b5cf6;
   }
 }
 
+* {
+  border-color: hsl(var(--border));
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Noto Sans Arabic', Arial, Helvetica, sans-serif;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+/* Mobile Responsiveness Enhancements */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+    margin-right: 0.5rem;
+    margin-left: 0;
+  }
+  
+  /* Mobile-specific button sizing */
+  .mobile-btn {
+    min-height: 44px; /* iOS recommended touch target */
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Mobile-friendly text sizes */
+  .mobile-text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  .mobile-text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:shadow-lg:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .hover\:scale-110:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover\:-translate-y-2:hover {
+    transform: translateY(-0.5rem);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --tolid-red: #b91c1c;
+    --tolid-gold: #d97706;
+    --tolid-charcoal: #000000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
