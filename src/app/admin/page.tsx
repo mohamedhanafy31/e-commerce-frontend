@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Lock, Mail, Eye, EyeOff, Shield, AlertCircle, Copy, Check } from "lucide-react";
@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { useAuthStore } from "@/stores/authStore";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function AdminLoginPage() {
+function AdminLoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { login, isLoading, error, isAuthenticated, clearError } = useAuthStore();
@@ -238,5 +238,20 @@ export default function AdminLoginPage() {
         </motion.div>
       </motion.div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-warm-sand/30 via-ivory/50 to-warm-sand/20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-green mx-auto"></div>
+          <p className="mt-4 text-deep-maroon/70">جاري التحميل...</p>
+        </div>
+      </div>
+    }>
+      <AdminLoginContent />
+    </Suspense>
   );
 }
